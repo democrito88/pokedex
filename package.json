@@ -1,0 +1,35 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Node.js experiment project using pokeAPI.",
+  "main": "app.js",
+  "scripts": {
+    "test": "teste"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/democrito88/pokedex.git"
+  },
+  "keywords": [
+    "pokemon",
+    "node",
+    "api",
+    "pokedex",
+    "public"
+  ],
+  "author": "Democrito d'Anunciaçao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/democrito88/pokedex/issues"
+  },
+  "homepage": "https://github.com/democrito88/pokedex#readme",
+  "dependencies": {
+    "bootstrap-icons": "^1.7.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "follow-redirects": "^1.14.6",
+    "path": "^0.12.7",
+    "socket.io": "^4.4.0",
+    "url": "^0.11.0"
+  }
+}
