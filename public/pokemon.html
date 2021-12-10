@@ -22,12 +22,17 @@
         });
 
         socket.on('enviarDetalhes', function (data) {
+            console.log(data);
             let pokemon = JSON.parse(data.pokemon);
-            console.log(JSON.parse(data.pokemon));
+            let pokemonSpecies = JSON.parse(data.pokemonSpecies);
             $("title").html("Detalhes de "+pokemon.name);
             $("#name").html(pokemon.name);   
             $("#imagem").prop('src', pokemon.sprites.front_default);
             $("#imagem").prop('alt', pokemon.name);
+            $("#altura").html((pokemon.height*10)+"cm");
+            $("#peso").html((pokemon.weight/10)+"Kg");
+            $("#blockquote").append(pokemonSpecies.flavor_text_entries[0].flavor_text);
+            $("[title=\"Source Title\"]").html(" Pokemon "+pokemonSpecies.flavor_text_entries[0].version.name);
 
             $.each(pokemon.types, function (indice, element) {
                 $("#tipo").append(
@@ -144,13 +149,6 @@
                     < Carousel -->
                     <div id="demo" class="card-img-top carousel slide" data-bs-ride="carousel">
 
-                        <!-- Indicators/dots >
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-                        </div -->
-
                         <!-- The slideshow/carousel -->
                         <div class="carousel-inner">
                             
@@ -165,15 +163,44 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title" id="name"></h5>
-                        <p class="card-text">Uma rápida descrição do pokemon sem entrar nos detalhes técnicos.
-                            Dentro do <i>lore</i> da franquia. Isso aqui está estático.</p>
+                        <h4 class="card-title" id="name"></h4>
+                        <div class="card-text">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5>Altura</h5>
+                                    <span id="altura"></span>
+                                </div>
+                                <div class="col-6">
+                                    <h5>Peso</h5>
+                                    <span id="peso"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9">
                 <div class="card rounded-5 shadow">
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <figure>
+                                    <blockquote class="blockquote">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"/>
+                                        </svg>
+                                        <span id="blockquote"></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16" style="transform: rotate(180deg); -o-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg);">
+                                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"/>
+                                        </svg>
+                                    </blockquote>
+                                    <figcaption class="blockquote-footer">
+                                        Pokedex em<cite title="Source Title"></cite>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-12 mb-8" id="stats">
                                 <h5 class="card-title border-bottom">Stats</h5>

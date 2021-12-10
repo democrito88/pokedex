@@ -95,8 +95,35 @@ io.on("connection", function (socket) {
     
             resource.on("end", function (item) {
                 var body = Buffer.concat(colecao);
-                //console.log(body.toString());
-                socket.emit('enviarDetalhes', {pokemon: body.toString()});
+                //Busca detalhada da espécie
+                var pokemonSpeciesOptions = {
+                    'method': 'GET',
+                    'hostname': 'pokeapi.co',
+                    'path': '/api/v2/pokemon-species/'+req.id,
+                    'headers': {
+                    },
+                    'maxRedirects': 20
+                };
+            
+                var requestSpecies = https.request(pokemonSpeciesOptions, function (resourceSpecies) {
+                    var colecaoSpecies = [];
+            
+                    resourceSpecies.on("data", function (itemSpecies) {
+                        colecaoSpecies.push(itemSpecies);
+                    });
+            
+                    resourceSpecies.on("end", function (itemSpecies) {
+                        var bodySpecies = Buffer.concat(colecaoSpecies);
+                        socket.emit('enviarDetalhes', {pokemon: body.toString(), pokemonSpecies: bodySpecies.toString()});
+                    });
+            
+                    resourceSpecies.on("error", function (error) {
+                        console.error(error);
+                    });
+                });
+            
+                requestSpecies.end();
+                //------------------
             });
     
             resource.on("error", function (error) {
