@@ -37,20 +37,21 @@
             $.each(pokemon.types, function (indice, element) {
                 $("#tipo").append(
                     '<div class="col-md-6">'
-                    + '<div class="card" style="width: 100%;">'
-                        + '<div class="row">'
-                            + '<div class="col-4">'
-                                + '<img src="/img/types/'+element.type.name+'.webp" class="card-img-top">'
-                            + '</div>'
-                            + '<div class="col-8">'
-                                + '<div class="card-body">'
-                                    + '<h5 class="card-title"><a href="/tipo/' + element.type.name + '">' + element.type.name + '</a></h5>'
-                                    + '<p class="card-text">Vantagem:</p>'
-                                    + '<p class="card-text">Desvantagem:</p>'
+                        + '<div class="card" style="width: 100%;">'
+                            + '<div class="row">'
+                                + '<div class="col-4">'
+                                    + '<img src="/img/types/'+element.type.name+'.webp" class="card-img-top">'
+                                + '</div>'
+                                + '<div class="col-8">'
+                                    + '<div class="card-body">'
+                                        + '<h5 class="card-title"><a href="/tipo/' + element.type.name + '">' + element.type.name + '</a></h5>'
+                                        + '<p class="card-text" id="vantagens' + element.type.name + '" data-url="'+ element.type.url +'" onload="pedirTipo(this.id, this.data-url)">Vantagem:'
+                                        +'</p>'
+                                        + '<p class="card-text">Desvantagem:</p>'
+                                    + '</div>'
                                 + '</div>'
                             + '</div>'
                         + '</div>'
-                    + '</div>'
                     +'</div>'
                 );
             });
@@ -146,6 +147,17 @@
                 +'</div>';
             }
             $(".carousel-inner").append(imagens);
+        });
+
+        function pedirTipo(id, url){
+            socket.emit("pedirTipo", {"id": id, "url": url})
+        }
+        
+
+        socket.on("enviarTipo", function(data){
+            $.each(data.damage_relations.double_damage_to, function(indice, tipo){
+                $("#"+data.id).append('<img src="/img/type/'+tipo.name+'.webp" width="10" height="10">');
+            });
         });
     </script>
     <title></title>
