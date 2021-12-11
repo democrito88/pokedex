@@ -133,6 +133,33 @@ io.on("connection", function (socket) {
     
         request.end();
     });
+
+    socket.on("pedirTipo", function(req){
+        var pokemonTipo = {
+            'method': 'GET',
+            'url': req.url,
+            'maxRedirects': 20
+        };
+    
+        var request = https.request(pokemonTipo, function (resource) {
+            var colecao = [];
+    
+            resource.on("data", function (item) {
+                colecao.push(item);
+            });
+    
+            resource.on("end", function (item) {
+                var body = Buffer.concat(colecao);
+                socket.emit('enviarTipo', {tipo: body.toString()});
+            });
+    
+            resource.on("error", function (error) {
+                console.error(error);
+            });
+        });
+    
+        request.end();
+    });
 });
 
 app.get('/pokemon/:id', function(req, res) {

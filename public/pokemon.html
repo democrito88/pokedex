@@ -22,7 +22,6 @@
         });
 
         socket.on('enviarDetalhes', function (data) {
-            console.log(data);
             let pokemon = JSON.parse(data.pokemon);
             let pokemonSpecies = JSON.parse(data.pokemonSpecies);
             $("title").html("Detalhes de "+pokemon.name);
@@ -31,24 +30,28 @@
             $("#imagem").prop('alt', pokemon.name);
             $("#altura").html((pokemon.height*10)+"cm");
             $("#peso").html((pokemon.weight/10)+"Kg");
-            $("#blockquote").append(pokemonSpecies.flavor_text_entries[0].flavor_text);
+            $("#aparencia").html(pokemonSpecies.shape.name);
+            $("#blockquote").append(pokemonSpecies.flavor_text_entries[0].flavor_text.replace('', ' '));
             $("[title=\"Source Title\"]").html(" Pokemon "+pokemonSpecies.flavor_text_entries[0].version.name);
 
             $.each(pokemon.types, function (indice, element) {
                 $("#tipo").append(
-                    '<div class="col-md-4">'
+                    '<div class="col-md-6">'
                     + '<div class="card" style="width: 100%;">'
-                    + '<svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">'
-                    + '<title>Placeholder</title>'
-                    + '<rect width="100%" height="100%" fill="#868e96"></rect>'
-                    + '<text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>'
-                    + '</svg>'
-                    + '<div class="card-body">'
-                    + '<h5 class="card-title"><a href="/tipo/' + element.type.name + '">' + element.type.name + '</a></h5>'
-                    + '<p class="card-text">Uma rápidad descrição deste tipo.</p>'
+                        + '<div class="row">'
+                            + '<div class="col-4">'
+                                + '<img src="/img/types/'+element.type.name+'.webp" class="card-img-top">'
+                            + '</div>'
+                            + '<div class="col-8">'
+                                + '<div class="card-body">'
+                                    + '<h5 class="card-title"><a href="/tipo/' + element.type.name + '">' + element.type.name + '</a></h5>'
+                                    + '<p class="card-text">Vantagem:</p>'
+                                    + '<p class="card-text">Desvantagem:</p>'
+                                + '</div>'
+                            + '</div>'
+                        + '</div>'
                     + '</div>'
-                    + '</div>'
-                    + '</div>'
+                    +'</div>'
                 );
             });
 
@@ -74,7 +77,9 @@
                 imagens += '<div class="carousel-item active">'
                     +'<img src="'+pokemon.sprites.front_default+'"  class="d-block" style="width:100%">'
                     +'<div class="carousel-caption">'
-                        +'<span class="text-dark"><i  class="bi bi-gender-male"></i> (frente)</span>'
+                        +'<span class="text-dark">'
+                            +'<i  class="bi bi-gender-male"></i>'+((pokemonSpecies.has_gender_differences == true) ? '' : '<i  class="bi bi-gender-female"></i>')+' (frente)'
+                        +'</span>'
                     +'</div>'
                 +'</div>';
             }
@@ -82,7 +87,9 @@
                 imagens += '<div class="carousel-item">'
                     +'<img src="'+pokemon.sprites.back_default+'"  class="d-block" style="width:100%">'
                     +'<div class="carousel-caption">'
-                        +'<span class="text-dark"><i  class="bi bi-gender-male"></i> (costas)</span>'
+                        +'<span class="text-dark">'
+                            +'<i  class="bi bi-gender-male"></i>'+((pokemonSpecies.has_gender_differences == true) ? '' : '<i  class="bi bi-gender-female"></i>')+' (costas)'
+                        +'</span>'
                     +'</div>'
                 +'</div>';
             }
@@ -106,7 +113,9 @@
                 imagens += '<div class="carousel-item">'
                     +'<img src="'+pokemon.sprites.front_shiny+'"  class="d-block" style="width:100%">'
                     +'<div class="carousel-caption">'
-                        +'<span class="text-dark"><i  class="bi bi-gender-male"></i> shiny (frente)</span>'
+                        +'<span class="text-dark">'
+                            +'<i  class="bi bi-gender-male"></i>'+((pokemonSpecies.has_gender_differences == true) ? '' : '<i  class="bi bi-gender-female"></i>')+' shiny (frente)'
+                        +'</span>'
                     +'</div>'
                 +'</div>';
             }
@@ -114,7 +123,9 @@
                 imagens += '<div class="carousel-item">'
                     +'<img src="'+pokemon.sprites.back_shiny+'"  class="d-block" style="width:100%">'
                     +'<div class="carousel-caption">'
-                        +'<span class="text-dark"><i  class="bi bi-gender-male"></i> shiny (costas)</span>'
+                        +'<span class="text-dark">'
+                            +'<i  class="bi bi-gender-male"></i>'+((pokemonSpecies.has_gender_differences == true) ? '' : '<i  class="bi bi-gender-female"></i>')+' shiny (costas)'
+                        +'</span>'
                     +'</div>'
                 +'</div>';
             }
@@ -140,8 +151,11 @@
     <title></title>
 </head>
 
-<body>
-    <main class="container bg-light" style="padding-top: 30px;">
+<body style="background-image: url('/img/color_background.png'); background-repeat: repeat;">
+    <header class="jumbotron bg-danger text-white text-center" style="padding: 30px 0;">
+        <img src="/img/pokemon_logo.png" alt="pokemon" width="240" height="100">
+    </header>
+    <main class="container" style="padding-top: 30px;">
         <div class="row">
             <div class="col-lg-3">
                 <div class="card rounded-5 shadow" style="width: 100%;">
@@ -161,9 +175,10 @@
                         <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
                             <span class="carousel-control-next-icon"></span>
                         </button>
+                        
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title" id="name"></h4>
+                        <h3 class="card-title text-center" id="name"></h3>
                         <div class="card-text">
                             <div class="row">
                                 <div class="col-6">
@@ -173,6 +188,12 @@
                                 <div class="col-6">
                                     <h5>Peso</h5>
                                     <span id="peso"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5>Aparência</h5>
+                                    <span id="aparencia"></span>
                                 </div>
                             </div>
                         </div>
