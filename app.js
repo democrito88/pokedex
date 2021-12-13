@@ -25,7 +25,7 @@ var options = {
     'path': '/api/v2/pokemon/',
     'headers': {
     },
-    'maxRedirects': 20
+    'maxRedirects': 50
 };
 
 io.on("connection", function (socket) {

@@ -13,7 +13,7 @@
         const socket = io('http://localhost:3000');
 
         var offset = 0;
-        var limit = 20;
+        var limit = 50;
 
         $(function(){
             socket.emit('abrir');
@@ -30,12 +30,12 @@
         });
 
         function proximo(){
-            offset += 20;
+            offset += 50;
             socket.emit("paginacao", {"offset": offset, "limit": limit});
         }
 
         function anterior(){
-            offset -= 20;
+            offset -= 50;
             socket.emit("paginacao", {"offset": offset, "limit": limit});
         }
 
