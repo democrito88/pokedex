@@ -1,0 +1,124 @@
+body{
+    background-image: url('/img/color_background.png');
+    background-repeat: repeat;
+}
+
+.bg-normal{
+    --bs-bg-opacity: 1;
+    background-color: lightgray !important;
+    color: black !important;
+}
+
+.bg-fighting{
+    --bs-bg-opacity: 1;
+    background-color: #d56723 !important;
+    color: white !important;
+}
+
+.bg-flying{
+    --bs-bg-opacity: 1;
+    background-color: skyblue !important;
+    color: white !important;
+}
+
+.bg-poison{
+    --bs-bg-opacity: 1;
+    background-color: violet !important;
+    color: white !important;
+}
+
+.bg-ground{
+    --bs-bg-opacity: 1;
+    background-color: brown !important;
+    color: white !important;
+}
+
+.bg-rock{
+    --bs-bg-opacity: 1;
+    background-color: darkgray !important;
+    color: white !important;
+}
+
+.bg-bug{
+    --bs-bg-opacity: 1;
+    background-color: olive !important;
+    color: white !important;
+}
+
+.bg-ghost{
+    --bs-bg-opacity: 1;
+    background-color: purple !important;
+    color: white !important;
+}
+
+.bg-steel{
+    --bs-bg-opacity: 1;
+    background-color: steelblue !important;
+    color: black !important;
+}
+
+.bg-fire{
+    --bs-bg-opacity: 1;
+    background-color: orangered !important;
+    color: white !important;
+}
+
+.bg-water{
+    --bs-bg-opacity: 1;
+    background-color: blue !important;
+    color: white !important;
+}
+
+.bg-grass{
+    --bs-bg-opacity: 1;
+    background-color: green !important;
+    color: white !important;
+}
+
+.bg-electric{
+    --bs-bg-opacity: 1;
+    background-color: yellow !important;
+    color: black !important;
+}
+
+.bg-psychic{
+    --bs-bg-opacity: 1;
+    background-color: magenta !important;
+    color: white !important;
+}
+
+.bg-ice{
+    --bs-bg-opacity: 1;
+    background-color: lightblue !important;
+    color: black !important;
+}
+
+.bg-dragon{
+    --bs-bg-opacity: 1;
+    background-color: slateblue !important;
+    color: red !important;
+}
+
+.bg-dark{
+    --bs-bg-opacity: 1;
+    background-color: slategrey !important;
+    color: white !important;
+}
+
+.bg-fairy{
+    --bs-bg-opacity: 1;
+    background-color: pink !important;
+    color: black !important;
+}
+
+.bg-unknow{
+    --bs-bg-opacity: 1;
+    background-color: white !important;
+    color: black !important;
+}
+
+.bg-shadow{
+    --bs-bg-opacity: 1;
+    background-color: whitesmoke !important;
+    color: slategrey !important;
+}
