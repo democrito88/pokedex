@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../public/img/favicon.ico" type="image/x-icon" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -15,12 +16,26 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
 
     <title>Pokedex</title>
 
     <script>
-        var app = angular.module('myApp', []);
-        app.controller('pokemonCtrl', function ($scope, $http) {
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function($routeProvider){
+            $routeProvider
+            .when("/", {
+                templateUrl: "pokedex.htm",
+                controller: "pokedexCtrl"
+            })
+            .when("/pokemon/id/:id", {
+                templateUrl: "pokemon.htm",
+                controller: "pokemonCtrl"
+            });
+        });
+
+        app.controller('pokedexCtrl', function ($scope, $http) {
             $scope.pokemons = [];
             $scope.pokemon = {name: "", types: [{type: {name: ""}}], stats: [{base_stat: "", stat: ""}, {base_stat: "", stat: ""}], sprites: {front_default: ""}};
 
@@ -67,121 +82,28 @@
                 $('[ng-model="ficha"]').prop('style', 'visibility: hidden;');
             }
         });
+
+        app.controller('pokemonCtrl', function($scope, $http){
+            console.log(id);
+            $http.get("https://pokeapi.co/api/v2/pokemon/"+id)
+                .then(function (response) {
+                    $scope.pokemon = response.data;
+
+                    $http.get("https://pokeapi.co/api/v2/pokemon-species/"+id)
+                    .then(function (responseSpecies) {
+                        $scope.pokemonSpecies = responseSpecies.data;
+                    });
+                });
+        });
     </script>
 </head>
 
-<body style="background-image: url('../public/img/color_background.png'); background-repeat: repeat;">
+<body ng-app="myApp">
     <header class="jumbotron bg-danger text-center">
         <img src="../public/img/pokemon_logo.png" alt="Pokemon!" height="100" width="240">
     </header>
-    <main class="container py-10" ng-app="myApp" ng-controller="pokemonCtrl">
-        <br>
-        <div class="row mb-8">
-            <div class="col-3">
-                <button class="btn btn-danger" ng-click="anterior()">&lt; Anterior</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-danger" ng-click="proximo()">Próximo ></button>
-            </div>
-            <div class="col-9"></div>
-        </div>
-        <br>
-        <div class="row pt-15 mb-8">
-            <div class="col-md-3">
-                <div class="card">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>pokemon</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="(key, pokemon) in pokemons">
-                                <td>{{offset + key + 1}}</td>
-                                <td><a href="pokemon.html/?id={{offset + key + 1}}" ng-mouseover="detalhes(pokemon.url)" ng-mouseout="esconder()">{{pokemon.name}}</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="row pl-15" ng-model="ficha" style="visibility: hidden;">
-                    <div class="card bg-{{pokemon.types[0].type.name}} rounded-5 shadow-lg" style="padding: 1em;">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card rounded-5" style="width: 100%;">
-                                    <!--img id="imagem" class="card-img-top" src="" alt="">
-                                    < Carousel -->
-                                    <div id="demo" class="card-img-top carousel slide" data-bs-ride="carousel">
-        
-                                        <!-- The slideshow/carousel -->
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img src={{pokemon.sprites.front_default}} class="d-block" style="width:100%">
-                                            </div>
-                                        </div>
-        
-                                        <!-- Left and right controls/icons -->
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#demo"
-                                            data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon"></span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#demo"
-                                            data-bs-slide="next">
-                                            <span class="carousel-control-next-icon"></span>
-                                        </button>
-        
-                                    </div>
-                                    <div class="card-body">
-                                        <h3 class="card-title text-center">{{pokemon.name}}</h3>
-                                        <div class="card-text">
-                                            <div class="row">
-                                                <div class="col-6" ng-repeat="type in pokemon.types">
-                                                    <span class="badge bg-{{type.type.name}}">{{type.type.name}}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="card rounded-5">
-                                    <div class="card-body">
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-12 mb-8" id="stats">
-                                                <h5 class="card-title border-bottom">Stats</h5>
-                                            </div>
-                                            <div class="row" ng-repeat="stat in pokemon.stats">
-                                                <div class="col-sm-2">
-                                                    <p>{{ stat.stat.name }}</p>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                    <div class="progress">
-                                                        <div class="progress-bar {{ stat.base_stat < 38.5 ? 'bg-danger' : (stat.base_stat < 77 ? 'bg-warning' : (stat.base_stat < 115.5 ? 'bg-success' : ''))}}" role="progressbar" style="width: {{ (stat.base_stat / 154)*100 }}%" aria-valuenow={{ stat.base_stat }} aria-valuemin="0" aria-valuemax="154">
-                                                            {{stat.base_stat}}%
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-3">
-                <button class="btn btn-danger" ng-click="anterior()">&lt; Anterior</button>
-                <button class="btn btn-danger" ng-click="proximo()">Próximo ></button>
-            </div>
-            <div class="col-8"></div>
-        </div> 
+    <main class="container py-10" ng-view>
+         
     </main>
 </body>
 </html>

@@ -1,124 +1,204 @@
 body{
-    background-image: url('/img/color_background.png');
+    background-image: url('../../public/img/color_background.png');
     background-repeat: repeat;
 }
 
-.bg-normal{
+.badge-normal{
     --bs-bg-opacity: 1;
     background-color: lightgray !important;
     color: black !important;
 }
 
-.bg-fighting{
+.badge-fighting{
     --bs-bg-opacity: 1;
     background-color: #d56723 !important;
     color: white !important;
 }
 
-.bg-flying{
+.badge-flying{
     --bs-bg-opacity: 1;
     background-color: skyblue !important;
     color: white !important;
 }
 
-.bg-poison{
+.badge-poison{
     --bs-bg-opacity: 1;
     background-color: violet !important;
     color: white !important;
 }
 
-.bg-ground{
+.badge-ground{
     --bs-bg-opacity: 1;
     background-color: brown !important;
     color: white !important;
 }
 
-.bg-rock{
+.badge-rock{
     --bs-bg-opacity: 1;
     background-color: darkgray !important;
     color: white !important;
 }
 
-.bg-bug{
+.badge-bug{
     --bs-bg-opacity: 1;
     background-color: olive !important;
     color: white !important;
 }
 
-.bg-ghost{
+.badge-ghost{
     --bs-bg-opacity: 1;
     background-color: purple !important;
     color: white !important;
 }
 
-.bg-steel{
+.badge-steel{
     --bs-bg-opacity: 1;
     background-color: steelblue !important;
     color: black !important;
 }
 
-.bg-fire{
+.badge-fire{
     --bs-bg-opacity: 1;
     background-color: orangered !important;
     color: white !important;
 }
 
-.bg-water{
+.badge-water{
     --bs-bg-opacity: 1;
     background-color: blue !important;
     color: white !important;
 }
 
-.bg-grass{
+.badge-grass{
     --bs-bg-opacity: 1;
     background-color: green !important;
     color: white !important;
 }
 
-.bg-electric{
+.badge-electric{
     --bs-bg-opacity: 1;
     background-color: yellow !important;
     color: black !important;
 }
 
-.bg-psychic{
+.badge-psychic{
     --bs-bg-opacity: 1;
     background-color: magenta !important;
     color: white !important;
 }
 
-.bg-ice{
+.badge-ice{
     --bs-bg-opacity: 1;
     background-color: lightblue !important;
     color: black !important;
 }
 
-.bg-dragon{
+.badge-dragon{
     --bs-bg-opacity: 1;
     background-color: slateblue !important;
     color: red !important;
 }
 
-.bg-dark{
+.badge-dark{
     --bs-bg-opacity: 1;
     background-color: slategrey !important;
     color: white !important;
 }
 
-.bg-fairy{
+.badge-fairy{
     --bs-bg-opacity: 1;
     background-color: pink !important;
     color: black !important;
 }
 
-.bg-unknow{
+.badge-unknow{
     --bs-bg-opacity: 1;
     background-color: white !important;
     color: black !important;
 }
 
-.bg-shadow{
+.badge-shadow{
     --bs-bg-opacity: 1;
     background-color: whitesmoke !important;
     color: slategrey !important;
+}
+
+.bg-normal{
+    background-color: lightgray !important;
+}
+
+.bg-figthing{
+    background-color: #d56723 !important;
+}
+
+.bg-flying{
+    background-color: skyblue !important;
+}
+
+.bg-poison{
+    background-color: violet !important;
+}
+
+.bg-ground{
+    background-color: brown !important;
+}
+
+.bg-rock{
+    background-color: darkgray !important;
+}
+
+.bg-bug{
+    background-color: olive !important;
+}
+
+.bg-ghost{
+    background-color: purple !important;
+}
+
+.bg-steel{
+    background-color: steelblue !important;
+}
+
+.bg-fire{
+    background-color: orangered !important;
+}
+
+.bg-water{
+    background-color: blue !important;
+}
+
+.bg-grass{
+    background-color: green !important;
+}
+
+.bg-electric{
+    background-color: yellow !important;
+}
+
+.bg-psychic{
+    background-color: magenta !important;
+}
+
+.bg-ice{
+    background-color: lightblue !important;
+}
+
+.bg-dragon{
+    background-color: slateblue !important;
+}
+
+.bg-dark{
+    background-color: slategrey !important;
+}
+
+.bg-fairy{
+    background-color: pink !important;
+}
+
+.bg-unknow{
+    background-color: white !important;
+}
+
+.bg-shadow{
+    background-color: whitesmoke !important;
 }
