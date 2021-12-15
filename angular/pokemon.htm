@@ -1,3 +1,10 @@
+<div class="row" style="margin: 15px 0;">
+    <div class="col-1"></div>
+    <div class="col-2">
+        <a href="#!"><button class="btn btn-danger"><i class="bi bi-arrow-left"></i>&nbsp;Voltar</button></a>
+    </div>
+    <div class="col-9"></div>
+</div>
 <div class="row">
     <div class="col-lg-3">
         <div class="card rounded-5 shadow" style="width: 100%;">
@@ -24,6 +31,17 @@
             <div class="card-body">
                 <h3 class="card-title text-center">{{pokemon.name}}</h3>
                 <div class="card-text">
+                    <div class="row">
+                        <div class="col-4" ng-if="pokemon.is_baby">
+                            <p class="badge bg-secondary">Bebê</p>
+                        </div>
+                        <div class="col-4" ng-if="pokemon.is_legendary">
+                            <p class="badge bg-secondary">Lendário</p>
+                        </div>
+                        <div class="col-4" ng-if="pokemon.is_mithycal">
+                            <p class="badge bg-secondary">Mítico</p>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             <h5>Altura</h5>
@@ -98,15 +116,24 @@
                 <br>
                 <div class="row mb-8" id="tipo">
                     <h5 class="card-title border-bottom mb-8">Tipo(s)</h5>
-                    <div class="col-md-6" ng-repeat="x in pokemon.types">
+                    <div class="col-md-6" ng-repeat="(key, x) in pokemon.types">
                         <div class="card">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="../public/img/types/{{x.type.name}}.webp" alt="">
+                                    <img src="../public/img/types/{{x.type.name}}.webp" style="margin: calc(50% - 27px);" width="111" height="111">
                                 </div>
                                 <div class="col-8">
-                                    <p class="card-title">{{x.type.name}}</p>
-                                    <div class="card-text"></div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{x.type.name}}</h4>
+                                        <div class="card-text">
+                                            <h6>Vantagem:</h6>
+                                            <img ng-repeat="y in types[key].damage_relations.double_damage_to" src="../public/img/types/{{y.name}}.webp" width="37" height="37">
+                                        </div>
+                                        <div class="card-text">
+                                            <h6>Desvantagem:</h6>
+                                            <img ng-repeat="z in types[key].damage_relations.double_damage_from" src="../public/img/types/{{z.name}}.webp" width="37" height="37">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
