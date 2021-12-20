@@ -21,7 +21,7 @@
                 <tbody>
                     <tr ng-repeat="(key, pokemon) in pokemons">
                         <td>{{offset + key + 1}}</td>
-                        <td><a href="pokemon/{{key+1}}" ng-mouseover="detalhes(pokemon.url)"
+                        <td><a href="#!/pokemon/{{key+1}}" ng-mouseover="detalhes(pokemon.url)"
                                 ng-mouseout="esconder()">{{pokemon.name}}</a></td>
                     </tr>
                 </tbody>
