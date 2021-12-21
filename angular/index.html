@@ -76,7 +76,6 @@
                     .then(function (response) {
                         $scope.pokemon = response.data;
                     });
-                console.log(event.pageY);
                 $('[ng-model="ficha"]').prop('style', 'visibility: visible; margin-top: calc('+event.pageY+'px - 400px);');
             }
 
