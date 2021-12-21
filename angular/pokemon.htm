@@ -20,6 +20,24 @@
                     <div class="carousel-item">
                         <img src={{pokemon.sprites.back_default}} class="d-block" style="width:100%">
                     </div>
+                    <div class="carousel-item" ng-if="pokemon.sprites.front_female != null">
+                        <img src={{pokemon.sprites.front_female}} class="d-block" style="width:100%">
+                    </div>
+                    <div class="carousel-item" ng-if="pokemon.sprites.back_female != null">
+                        <img src={{pokemon.sprites.back_female}} class="d-block" style="width:100%">
+                    </div>
+                    <div class="carousel-item" ng-if="pokemon.sprites.front_shiny != null">
+                        <img src={{pokemon.sprites.front_shiny}} class="d-block" style="width:100%">
+                    </div>
+                    <div class="carousel-item" ng-if="pokemon.sprites.back_shiny != null">
+                        <img src={{pokemon.sprites.back_shiny}} class="d-block" style="width:100%">
+                    </div>
+                    <div class="carousel-item" ng-if="pokemon.sprites.front_shiny_female != null">
+                        <img src={{pokemon.sprites.front_shiny_female}} class="d-block" style="width:100%">
+                    </div>
+                    <div class="carousel-item" ng-if="pokemon.sprites.back_shiny_female != null">
+                        <img src={{pokemon.sprites.back_shiny_female}} class="d-block" style="width:100%">
+                    </div>
                 </div>
 
                 <!-- Left and right controls/icons -->
