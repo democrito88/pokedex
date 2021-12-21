@@ -76,7 +76,8 @@
                     .then(function (response) {
                         $scope.pokemon = response.data;
                     });
-                    $('[ng-model="ficha"]').prop('style', 'visibility: visible;');
+                console.log(event.pageY);
+                $('[ng-model="ficha"]').prop('style', 'visibility: visible; margin-top: calc('+event.pageY+'px - 400px);');
             }
 
             $scope.esconder = function(){
@@ -85,6 +86,7 @@
         });
 
         app.controller('pokemonCtrl', function($scope, $routeParams, $http){
+
             $http.get("https://pokeapi.co/api/v2/pokemon/"+$routeParams.id)
                 .then(function (response) {
                     $scope.pokemon = response.data;
@@ -103,6 +105,13 @@
                     });
                 });
         });
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(
+            function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
     </script>
 </head>
 
