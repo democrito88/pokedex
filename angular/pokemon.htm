@@ -55,14 +55,14 @@
                 <h3 class="card-title text-center">{{pokemon.name}}</h3>
                 <div class="card-text">
                     <div class="row">
-                        <div class="col-4" ng-if="pokemon.is_baby">
-                            <p class="badge bg-secondary">Bebê</p>
+                        <div class="col-sm-4" ng-if="pokemonSpecies.is_baby == 1">
+                            <span class="badge bg-primary">bebê</span>
                         </div>
-                        <div class="col-4" ng-if="pokemon.is_legendary">
-                            <p class="badge bg-secondary">Lendário</p>
+                        <div class="col-sm-4" ng-if="pokemonSpecies.is_legendary == true">
+                            <span class="badge bg-primary">lendário</span>
                         </div>
-                        <div class="col-4" ng-if="pokemon.is_mithycal">
-                            <p class="badge bg-secondary">Mítico</p>
+                        <div class="col-sm-4" ng-if="pokemonSpecies.is_mythical == true">
+                            <span class="badge bg-primary">mítico</span>
                         </div>
                     </div>
                     <div class="row">
