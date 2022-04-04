@@ -162,6 +162,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="row my-5" id="evolution">
+                    <h5 class="card-title border-bottom mb-8">Cadeia evolutiva</h5>
+                    <div class="col-md-3" ng-repeat="(key, x) in evolution">
+                        <div class="float-start card">
+                            <img src="{{x.sprite}}" class="card-img-top">
+                            <div class="card-body">
+                                <h6 class="h6 text-center">{{x.nome}}</h6>
+                                <span class="text-center">{{x.condition}}</span>
+                            </div>
+                        </div>
+                        <div class="float-end py-5">
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

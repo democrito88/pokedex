@@ -101,6 +101,11 @@
                                 $scope.types.push(responseType.data);
                             });
                         }
+
+                        $http.get($scope.pokemonSpecies.evolution_chain.url)
+                        .then(function (responseEvolutionChain) {
+                            $scope.evolution = getPokemonEvolutionChain(responseEvolutionChain.data.chain);
+                        });
                     });
                 });
         });
@@ -110,6 +115,47 @@
             function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
             });
+
+        function getPokemonEvolutionChain(chain){
+            let especies = [];
+            let nome = chain.species.name;
+            let sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+chain.species.url.split("/")[6]+".png";
+            let condition = chain.evolution_details !== undefined && chain.evolution_details[0] !== undefined ? getEvolutionDetails(chain.evolution_details[0]) : 'nível 1';
+            especies.push({"nome": nome, "sprite": sprite, "condition": condition});
+
+            if(chain !== undefined && chain.evolves_to !== []){
+                let tamanho = chain.evolves_to.length;
+                for(let i = 0; i < tamanho; i++){
+                    let auxiliar = getPokemonEvolutionChain(chain.evolves_to[i])
+                    for(let i = 0; i < auxiliar.length; i++){
+                        especies.push(auxiliar[i]);
+                    }
+                }
+            }
+            
+            return especies;
+        }
+
+        function getEvolutionDetails(evolution_details){
+            console.log(evolution_details.trigger);
+            switch (evolution_details.trigger.name) {
+                case 'level-up':
+                    return 'nível '+evolution_details.min_level;
+                    break;
+
+                case 'trade':
+                    return 'ao trocar';
+                    break;
+
+                case 'use-item':
+                    return 'utilizar '+evolution_details.item.name;
+                    break;
+
+                default:
+                    return '';
+                    break;
+            }
+        }
 
     </script>
 </head>
